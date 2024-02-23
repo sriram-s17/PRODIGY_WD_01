@@ -178,7 +178,6 @@
                     currentsectionid = section.getAttribute("id");
                 }
             });
-            console.log(currentsectionid)
             navlinklist.forEach((a)=>{
                 if(a.getAttribute("href")=="#"+currentsectionid){
                     document.querySelector("nav a.active").classList.remove("active");
@@ -186,12 +185,12 @@
                 }
             });
         }
-        let screen = window.matchMedia("(max-width: 767px)");
-        if(screen.matches){
+        let mediascreen = window.matchMedia("(max-width: 767px)");
+        if(mediascreen.matches){
             nav.classList.add("contracted");
         }
-        screen.addEventListener("change",()=>{
-            if(screen.matches){
+        mediascreen.addEventListener("change",()=>{
+            if(mediascreen.matches){
                 nav.classList.add("contracted");
             }
             else{
