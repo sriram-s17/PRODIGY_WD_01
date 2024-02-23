@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Indie+Flower&family=Pacifico&family=Shadows+Into+Light&display=swap');
+*{
+    box-sizing: border-box;
+}
+html{
+    scroll-behavior: smooth;
+}
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index: 1;
+    width:100%;
+    background-color: #eee;
+    border-bottom:2px solid #bbb;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+}
+header h1{
+    margin: 10px 20px;
+    font:bold 24px "Pacifico";
+    cursor:pointer;
+}
+nav{
+    display:flex;
+    align-items:center;
+    margin:0px 10px;
+}
+nav a{
+    display:block;
+    color: #333;
+    padding:10px 16px;
+    margin: 0px 3px;
+    text-decoration: none;
+    border-radius:20px;
+    font:14px "verdana";
+}
+@media (hover:hover){
+    nav a:hover{
+        background-color: #888;
+        color:white;
+    }
+}
+nav a.active{
+    background-color: dodgerblue;
+    color:white;
+}
+.menuicon div div {
+    width: 20px;
+    height: 2px;
+    background-color: black;
+    margin: 4px 0;
+}
+.menuicon div{
+    cursor:pointer;
+}
+.menuicon {
+    display: none;
+    padding: 10px 16px;
+}
+section{
+    height:500px;
+    margin:0px 5px 20px;
+    box-shadow: 1px 1px 10px black;
+    padding:20px;
+}
+section h2{
+    font:20px "verdana";
+    margin:0px;
+}
+section:nth-child(3n+1){
+    background-color: rgb(30, 144, 255, 0.3)
+}
+section:nth-child(3n+2){
+    background-color: rgba(255, 196, 0, 0.3);
+}
+section:nth-child(3n+3){
+    background-color:rgba(0, 0, 0, 0.1);
+}
+footer{
+    height:300px;
+    background-color:#333;
+    padding:20px;
+    text-align: center;
+}
+h3{
+    font:20px "verdana";
+    color:white;
+}
+@media only screen and (max-width:767px){
+    .menuicon{
+        display:flex;
+        justify-content: end;
+    }
+    nav.contracted{
+        flex-direction:row;
+        align-items:center;
+    }
+    nav.expanded{
+        flex-direction: column;
+        align-items: normal;
+        margin:10px 10px;
+    }
+    nav.contracted a{
+        display:none;
+    }
+    nav.contracted a.active{
+        display:block;
+        background-color:white;
+        color:#333;
+        border: 2px solid #bbb;
+    }
+    nav.expanded a{
+        display:block;
+        margin-bottom: 5px;
+        text-align:center;
+    }
+}

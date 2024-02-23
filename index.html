@@ -4,119 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Landing Page</title>
-    <!--link href="style.css" rel="stylesheet">
-    <script src="script.js" defer></script>-->
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Indie+Flower&family=Pacifico&family=Shadows+Into+Light&display=swap');
-        *{
-            box-sizing: border-box;
-            font:14px "verdana";
-        }
-        html{
-            scroll-behavior: smooth;
-        }
-        header{
-            position:fixed;
-            top:0;
-            left:0;
-            z-index: 1;
-            width:100%;
-            background-color: #eee;
-            border-bottom:2px solid #bbb;
-            display:flex;
-            justify-content: space-between;
-            align-items:center;
-        }
-        header h1{
-            margin: 10px 20px;
-            font:bold 24px "Pacifico";
-            cursor:pointer;
-        }
-        nav{
-            display:flex;
-            align-items:center;
-            margin:0px 10px;
-        }
-        nav a{
-            display:block;
-            color: #333;
-            padding:10px 16px;
-            margin: 0px 3px;
-            text-decoration: none;
-            border-radius:20px;
-        }
-        @media (hover:hover){
-            nav a:hover{
-                background-color: #888;
-                color:white;
-            }
-        }
-        nav a.active{
-            background-color: dodgerblue;
-            color:white;
-        }
-        section{
-            height:500px;
-            margin:0px 5px 20px;
-            box-shadow: 1px 1px 10px black;
-            padding:20px;
-        }
-        section:nth-child(3n+1){
-            background-color: rgb(30, 144, 255, 0.3)
-        }
-        section:nth-child(3n+2){
-            background-color: rgba(255, 196, 0, 0.3);
-        }
-        section:nth-child(3n+3){
-            background-color:rgba(0, 0, 0, 0.1);
-        }
-        section h2{
-            font-size:20px;
-            margin:0px;
-        }
-        .menuicon div div {
-            width: 20px;
-            height: 2px;
-            background-color: black;
-            margin: 4px 0;
-        }
-        .menuicon {
-            display: none;
-            padding: 10px 16px;
-        }
-        .menuicon div{
-            cursor:pointer;
-        }
-        @media only screen and (max-width:767px){
-            .menuicon{
-                display:flex;
-                justify-content: end;
-            }
-            nav.contracted{
-                flex-direction:row;
-                align-items:center;
-            }
-            nav.expanded{
-                flex-direction: column;
-                align-items: normal;
-                margin:10px 10px;
-            }
-            nav.contracted a{
-                display:none;
-            }
-            nav.contracted a.active{
-                display:block;
-                background-color:white;
-                color:#333;
-                border: 2px solid #bbb;
-            }
-            nav.expanded a{
-                display:block;
-                margin-bottom: 5px;
-                text-align:center;
-            }
-        }
-    </style>
+    <link href="main.css" rel="stylesheet">
+    <script src="main.js" defer></script>
 </head>
 <body>
     <header>
@@ -126,12 +15,14 @@
             <a href="#about">About</a>
             <a href="#others">Others</a>
             <a href="#contact">Contact</a>
-            <div class="menuicon"><div><div></div><div></div><div></div></div></div>
+            <div class="menuicon"><div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div></div>
         </nav>
     </header>
-    <div id="headerspace">
-
-    </div>
+    <div id="headerspace"></div>
     <main>
         <section id="start">
             <h2>Start</h2>
@@ -147,83 +38,7 @@
         </section>
     </main>
     <footer>
-
+        <h3>Footer section</h3>
     </footer>
-    <script>
-        const header = document.querySelector("header");
-        const pagetitle = document.querySelector("header h1");
-        const nav = document.querySelector("nav");
-        const navlinklist = document.querySelectorAll("nav a");
-        const menuicon = document.querySelector(".menuicon");
-        const menuicondiv = document.querySelector(".menuicon div");
-        const headerspace = document.querySelector("#headerspace");
-        const sections = document.querySelectorAll("main section");
-        let headerheight = header.offsetHeight;
-        headerspace.style.height = headerheight+"px";
-
-        navlinklist.forEach(function(a){
-            a.addEventListener("click",()=>{
-                event.preventDefault();
-                let href = a.getAttribute("href");
-                let section = document.querySelector(href);
-                window.scrollTo(0,section.offsetTop-headerheight-10);
-            });
-        });
-
-        let currentsectionid;
-        window.onscroll = function(){
-            sections.forEach(function(section){
-                if (pageYOffset+screen.height/3 >= section.offsetTop){
-                    currentsectionid = section.getAttribute("id");
-                }
-                if(pageYOffset<section.offsetTop && (pageYOffset+screen.height)>(section.offsetTop+section.offsetHeight)){
-                    currentsectionid = section.getAttribute("id");
-                }
-            });
-            navlinklist.forEach((a)=>{
-                if(a.getAttribute("href")=="#"+currentsectionid){
-                    document.querySelector("nav a.active").classList.remove("active");
-                    a.classList.add("active");
-                }
-            });
-        }
-        let mediascreen = window.matchMedia("(max-width: 767px)");
-        if(mediascreen.matches){
-            nav.classList.add("contracted");
-        }
-        mediascreen.addEventListener("change",()=>{
-            if(mediascreen.matches){
-                nav.classList.add("contracted");
-            }
-            else{
-                nav.classList.remove("contracted")
-            }
-        });
-        menuicondiv.addEventListener("click",()=>{
-            navlinkstoggle();
-        });
-        document.addEventListener("click", function(event) { 
-        let target = event.target;
-        if(!target.closest("header") && nav.classList.contains("expanded")){
-            navlinkstoggle();
-        }        
-        });
-        function navlinkstoggle(){
-            if(nav.classList.contains("contracted")){
-                nav.insertBefore(menuicon, nav.children[0])
-                nav.classList.remove("contracted");
-                nav.classList.add("expanded");
-                pagetitle.style.display="none";
-                header.style.display="block";
-            }
-            else{
-                nav.insertBefore(menuicon, null);
-                nav.classList.remove("expanded");
-                nav.classList.add("contracted");
-                pagetitle.style.display="block";
-                header.style.display="flex";
-            }
-        }
-    </script>
 </body>
 </html>
