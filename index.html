@@ -44,11 +44,12 @@
             margin: 0px 3px;
             text-decoration: none;
             border-radius:20px;
-            transition: all 0.2s ease;
         }
-        nav a:hover{
-            background-color: #888;
-            color:white;
+        @media (hover:hover){
+            nav a:hover{
+                background-color: #888;
+                color:white;
+            }
         }
         nav a.active{
             background-color: dodgerblue;
@@ -100,7 +101,7 @@
                 align-items: normal;
                 margin:10px 10px;
             }
-            nav a{
+            nav.contracted a{
                 display:none;
             }
             nav.contracted a.active{
@@ -110,6 +111,7 @@
                 border: 2px solid #bbb;
             }
             nav.expanded a{
+                display:block;
                 margin-bottom: 5px;
                 text-align:center;
             }
@@ -198,15 +200,21 @@
             }
         });
         menuicondiv.addEventListener("click",()=>{
+            navlinkstoggle();
+        });
+        document.addEventListener("click", function(event) { 
+        let target = event.target;
+        if(!target.closest("header") && nav.classList.contains("expanded")){
+            navlinkstoggle();
+        }        
+        });
+        function navlinkstoggle(){
             if(nav.classList.contains("contracted")){
                 nav.insertBefore(menuicon, nav.children[0])
                 nav.classList.remove("contracted");
                 nav.classList.add("expanded");
                 pagetitle.style.display="none";
                 header.style.display="block";
-                navlinklist.forEach((a)=>{
-                    a.style.display="block";
-                });
             }
             else{
                 nav.insertBefore(menuicon, null);
@@ -214,13 +222,8 @@
                 nav.classList.add("contracted");
                 pagetitle.style.display="block";
                 header.style.display="flex";
-                navlinklist.forEach((a)=>{
-                    if(!a.classList.contains("active")){
-                        a.style.display="none";
-                    }
-                });
             }
-        });
+        }
     </script>
 </body>
 </html>
