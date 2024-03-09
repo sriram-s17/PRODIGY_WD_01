@@ -25,10 +25,10 @@ navlinklist.forEach(function(a){
 let currentsectionid;
 window.onscroll = function(){
     sections.forEach(function(section){
-        if (pageYOffset+screen.height/3 >= section.offsetTop){
+        if (scrollY+screen.height/3 >= section.offsetTop){
             currentsectionid = section.getAttribute("id");
         }
-        if(pageYOffset<section.offsetTop && (pageYOffset+screen.height)>(section.offsetTop+section.offsetHeight)){
+        if(scrollY<section.offsetTop && (scrollY+screen.height)>(section.offsetTop+section.offsetHeight)){
             currentsectionid = section.getAttribute("id");
         }
     });
